@@ -16,4 +16,4 @@ export const ValidateCategory = (category) =>{
     });
 
     return Schema.validateAsync(category);
-}
+};
