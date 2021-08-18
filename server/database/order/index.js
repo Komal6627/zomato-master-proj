@@ -21,11 +21,7 @@ const OrderSchema = new mongoose.Schema({
             },
         },
     ],
-
-    orderRatings: {
-        type: Number,
-        required: true,
-    }
+    
   },
   {
      timestamps: true,
