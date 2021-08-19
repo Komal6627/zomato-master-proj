@@ -6,6 +6,9 @@ import multer from "multer";
 // Database modal
 import { ImageModel } from "../../database/allModels";
 
+//Vlaidation
+import { ValidateRestaurantUploadImage } from "../../Validation/image";
+
 // Utilities
 import { s3Upload } from "../../Utils/AWS/s3";
 
@@ -24,6 +27,8 @@ Method    POST
 */
 Router.post("/", upload.single("file"), async (req, res) => {
   try {
+    await ValidateRestaurantUploadImage(req.file);
+
     const file = req.file;
 
     // s3 bucket options
