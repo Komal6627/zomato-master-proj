@@ -4,44 +4,42 @@ import Slider from "react-slick";
 
 //component
 import DeliveryCategory from "./DeliveryCategory";
-
-//Arrows
 import { NextArrow, PrevArrow } from "../CarousalArrow";
 
 const DeliveryCarousal = () => {
     const categories = [
         {
-            image: "https://b.zmtcdn.com/data/pictures/chains/0/3301200/e559b2aee1b89bd6c7e1cef2a5290173_o2_featured_v2.jpg",
-            title:"biryani",
-        },
-
-        {
-            image: "https://b.zmtcdn.com/data/pictures/5/18748725/ddf36663a82194c1b780a2309391b11e_featured_v2.jpg",
-            title:"vadapav",
-        },
-
-        {
-            image: "https://b.zmtcdn.com/data/pictures/5/18748725/ddf36663a82194c1b780a2309391b11e_featured_v2.jpg",
-            title:"vadapav",
-        },
-
-        {
-            image:"https://b.zmtcdn.com/data/pictures/chains/0/3300300/79b85b3900c1c168a25dc1de70958e10_featured_v2.jpg",
-            title:"pizza",
-        },
-
-        {
-            image: "https://b.zmtcdn.com/data/pictures/4/18889554/836b4e4bfdc56ee05f6611bae5dca5a5_o2_featured_v2.jpg",
-            title:"ice-cream",
+            image: "https://b.zmtcdn.com/data/homepage_dish_data/4/76d788a2600b609bb0a08443e03df95b.png",
+            title: "biryani",
         },
         {
-            image:"https://b.zmtcdn.com/data/pictures/6/18703556/ba7df4716529af52920b8fc8a64d8219_o2_featured_v2.jpg",
-            title:"pastrie",
-        }
+            image: "https://b.zmtcdn.com/data/dish_photos/cf9/08bf86a8c902df8e6d703e374391ecf9.jpg",
+            title: "Kesari Bath",
+        },
+        {
+            image: "https://b.zmtcdn.com/data/homepage_dish_data/4/742929dcb631403d7c1c1efad2ca2700.png",
+            title: "Chicken",
+        },
+        {
+            image: "https://b.zmtcdn.com/data/dish_images/aebeb88b78a4a83ea9e727f234899bed1602781186.png",
+            title: "Chaat",
+        },
+        {
+            image: "https://b.zmtcdn.com/data/dish_images/770ba11e5159e6740d68f71f1b838a261612463246.png",
+            title: "Cake",
+        },
+        {
+            image: "https://b.zmtcdn.com/data/homepage_dish_data/4/eb2ef145c0fcad44dbb4ed26aad1527d.png",
+            title: "Rolls",
+        },
+        {
+            image: "https://b.zmtcdn.com/data/dish_photos/06a/af146087e76aed8c0baa90a84a6f206a.jpg",
+            title: "Sagu",
+        },
     ];
 
     const settings = {
-        arrows:true,
+        arrows: true,
         infinite: true,
         speed: 500,
         slidesToShow: 4,
@@ -51,22 +49,22 @@ const DeliveryCarousal = () => {
     }
 
     return (
-       <>
+        <>
             <h1 className="text-xl mb-4 font-semibold">Inspiration for your first order</h1>
             <div className="lg:hidden flex gap-3  lg:gap-0 flex-wrap justify-between">
                 {
-                    categories.map((food) => ( <DeliveryCategory {...food }/>) ) 
-                }       
+                    categories.map((food) => (<DeliveryCategory {...food} />))
+                }
             </div>
 
             <div className="hidden lg:block">
                 <Slider {...settings}>
-                {
-                    categories.map((food) => ( <DeliveryCategory {...food }/>) ) 
-                }    
+                    {
+                        categories.map((food) => (<DeliveryCategory {...food} />))
+                    }
                 </Slider>
             </div>
-       </>
+        </>
     );
 };
 
