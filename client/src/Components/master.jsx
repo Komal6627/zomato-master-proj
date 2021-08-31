@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 //components
 import Delivery from "./Delivery";
 import Dinning from "./Dinning";
-import DinningCarousal from "./Dinning/DinningCarousal";
+import NightLife from "./NightLife";
+
 
 
 
@@ -16,6 +17,7 @@ const Master = () => {
             <div className="my-5">
                 { type === "delivery"  && <Delivery/> }
                 {type === "dinning" && <Dinning/> }
+                { type === "night" && <NightLife/> }
             </div>
           
         </>
