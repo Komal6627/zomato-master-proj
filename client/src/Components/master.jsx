@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import Delivery from "./Delivery";
 import Dinning from "./Dinning";
 import NightLife from "./NightLife";
-
+import Nutrition from "./Nutrition";
 
 
 
@@ -16,10 +16,10 @@ const Master = () => {
         <>
             <div className="my-5">
                 { type === "delivery"  && <Delivery/> }
-                {type === "dinning" && <Dinning/> }
+                { type === "dinning" && <Dinning/> }
                 { type === "night" && <NightLife/> }
-            </div>
-          
+                {type === "nutri" && <Nutrition/>}
+            </div>        
         </>
     );
 };
