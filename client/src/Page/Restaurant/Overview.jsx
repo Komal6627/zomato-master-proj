@@ -3,28 +3,56 @@ import { Link, useParams } from "react-router-dom";
 import { IoMdArrowDropright } from "react-icons/io";
 import Slider from "react-slick";
 import ReactStars from "react-rating-stars-component";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-
 
 //Component
 import MenuCollection from "../../Components/Restaurant/MenuCollection";
 import MenuSimilarRestaurantCard from "../../Components/Restaurant/MenuSimilarRestaurantCard";
 import { NextArrow, PrevArrow } from "../../Components/CarousalArrow";
 import ReviewCard from "../../Components/Restaurant/Reviews/ReviewCard";
+import Mapview from "../../Components/Restaurant/Mapview";
+
 
 
 const Overview = () => {
     const { id } = useParams();
 
     const settings = {
-        arrows: true,
-        infinite: true,
+        dots: true,
+        infinite: false,
         speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        initialSlide: 0,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
-    };
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true,
+            },
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2,
+              initialSlide: 2,
+            },
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+            },
+          },
+        ],
+      };
+
 
     const ratingChanged = (newRating) => {
         console.log(newRating);
@@ -88,6 +116,11 @@ const Overview = () => {
                             activeColor="#ffd700"
                         />
                     </div>
+
+                    <div className="my-4 w-full   md:hidden flex flex-col gap-4">
+                        <Mapview  title="Spice Mystery"  phno="+917219798509"  mapLocation={[21.313077942932242, 79.08410283345113]}  address="Plot 5, High Court Society, Milind   Nagar, Vivekanand Nagar, Nagpur" />
+                    </div>
+
                     <div className="my-4 flex flex-col gap-4">
                         <ReviewCard />
                         <ReviewCard />
@@ -95,28 +128,10 @@ const Overview = () => {
                         <ReviewCard />
                     </div>
                 </div>
-                <aside style={{ height: "fit-content" }} className="hidden md:block md:w-4/12 sticky rounded-xl  top-2 bg-white p-3 shadow-md">
-                    <div>
-                        <h4 className="text-lg font-medium ">Call</h4>
-                        <h5 className="text-zomato-400 font-medium">+917219798509</h5>
-                    </div>
+                <aside style={{ height: "fit-content" }} className="hidden md:flex  md:w-4/12 sticky rounded-xl  top-2 bg-white p-3 shadow-md flex flex-col gap-4">
 
-                    <div>
-                        <h4 className="text-lg font-medium">Direction</h4>
-                        <div className="w-full h-48">
-                        <MapContainer center={[21.282369871813387, 79.061337627554]} zoom={13} scrollWheelZoom={false}>
-                            <TileLayer
-                                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            />
-                            <Marker position={[21.282369871813387, 79.061337627554]}>
-                                <Popup>
-                                    A pretty CSS3 popup. <br /> Easily customizable.
-                                </Popup>
-                            </Marker>
-                        </MapContainer>
-                        </div>
-                    </div>
+                    <Mapview  title="Spice Mystery"  phno="+917219798509"  mapLocation={[21.313077942932242, 79.08410283345113]}  address="Plot 5, High Court Society, Milind Nagar, Vivekanand Nagar, Nagpur" />
+
                 </aside>
             </div>
         </>
