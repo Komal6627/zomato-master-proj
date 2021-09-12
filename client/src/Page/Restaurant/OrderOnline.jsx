@@ -42,18 +42,6 @@ const OrderOnline = () => {
                             ]}
                         />
 
-                        <FoodList
-                            title="Pizza"
-                            items={[
-                                {
-                                    price: "300",
-                                    rating: "3",
-                                    description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio sint quas autem obcaecati ipsum architecto minus illo! Molestiae nostrum repellat, sunt esse, ea dolorem sed unde aliquid assumenda id recusandae.",
-                                    image: "https://b.zmtcdn.com/data/dish_photos/bcc/8de555f5fee13dd644c121e82659abcc.jpg",
-                                },
-                            ]}
-                        />
-
                     </section>
                 </div>
             </div>
