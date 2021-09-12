@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { IoMdArrowDropright } from "react-icons/io";
 import Slider from "react-slick";
 import ReactStars from "react-rating-stars-component";
+import ImageViewer from 'react-simple-image-viewer';
 
 //Component
 import MenuCollection from "../../Components/Restaurant/MenuCollection";
@@ -26,32 +27,32 @@ const Overview = () => {
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
         responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3,
-              infinite: true,
-              dots: true,
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true,
+                },
             },
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 2,
-              initialSlide: 2,
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    initialSlide: 2,
+                },
             },
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
             },
-          },
         ],
-      };
+    };
 
 
     const ratingChanged = (newRating) => {
@@ -74,7 +75,12 @@ const Overview = () => {
                     </div>
 
                     <div className="flex flex-wrap gap-3">
-                        <MenuCollection menuTitle="Menu" pages="3" image="https://b.zmtcdn.com/data/menus/304/18995304/553736fb245c3dec3752b6903a0d9e60.jpg" />
+                        <MenuCollection menuTitle="Menu" pages="3"
+                            image={[
+                                "https://b.zmtcdn.com/data/menus/304/18995304/553736fb245c3dec3752b6903a0d9e60.jpg",
+                                "https://b.zmtcdn.com/data/menus/300/3300300/8fdc1123d9089b610d77ebcf1cff5a82.jpg",
+                                "https://b.zmtcdn.com/data/menus/304/18995304/553736fb245c3dec3752b6903a0d9e60.jpg"
+                            ]} />
                     </div>
 
                     <h4 className="text-lg font-medium my-4">Cuisines</h4>
@@ -118,7 +124,7 @@ const Overview = () => {
                     </div>
 
                     <div className="my-4 w-full   md:hidden flex flex-col gap-4">
-                        <Mapview  title="Spice Mystery"  phno="+917219798509"  mapLocation={[21.313077942932242, 79.08410283345113]}  address="Plot 5, High Court Society, Milind   Nagar, Vivekanand Nagar, Nagpur" />
+                        <Mapview title="Spice Mystery" phno="+917219798509" mapLocation={[21.313077942932242, 79.08410283345113]} address="Plot 5, High Court Society, Milind   Nagar, Vivekanand Nagar, Nagpur" />
                     </div>
 
                     <div className="my-4 flex flex-col gap-4">
@@ -130,7 +136,7 @@ const Overview = () => {
                 </div>
                 <aside style={{ height: "fit-content" }} className="hidden md:flex  md:w-4/12 sticky rounded-xl  top-2 bg-white p-3 shadow-md flex flex-col gap-4">
 
-                    <Mapview  title="Spice Mystery"  phno="+917219798509"  mapLocation={[21.313077942932242, 79.08410283345113]}  address="Plot 5, High Court Society, Milind Nagar, Vivekanand Nagar, Nagpur" />
+                    <Mapview title="Spice Mystery" phno="+917219798509" mapLocation={[21.313077942932242, 79.08410283345113]} address="Plot 5, High Court Society, Milind Nagar, Vivekanand Nagar, Nagpur" />
 
                 </aside>
             </div>
