@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { AiTwotoneStar } from "react-icons/ai";
+import { getImage } from "../Redux/Image/Image.action";
 
 const RestaurantCard = (props) => {
+    const [image, setImage] = useState({
+        image: [
+            {
+                location: {type: String, required: true },
+            },
+        ],
+    });
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        props.photos && dispatch(getImage(props.photos)).then((data) => setImage(data.payload.image));
+    }, [props.photos]);
     return (
         <>
             <div className="mt-6 bg-white p-4 w-full  rounded-3xl transition duration-700 ease-in-out hover:shadow-lg md:w-1/2 lg:w-1/3">
@@ -21,18 +35,18 @@ const RestaurantCard = (props) => {
                         </div>
                         <span className="bg-white bg-opacity-75 p-1 rounded mr-3">{props.durationOfdelivery} min</span>
                     </div>
-                    <img src={ props.photos.length && props.photos[0]} alt="food" className="w-full h-full rounded-3xl mr-3" />
+                    <img src={image.image.length && image.image[0].location } alt="food" className="w-full h-full rounded-2xl mr-3" />
                 </div>
 
                 <div className="my-2 flex flex-col gap-2">
                     <div className="flex items-center justify-between">
                         <h4 className="text-xl font-medium">{props.name}</h4>
                         <span className="bg-green-800 text-white text-sm p-1 rounded flex items-center ">
-                        { props.restaurantReviewValue} <AiTwotoneStar /></span>
+                            {props.restaurantReviewValue} <AiTwotoneStar /></span>
                     </div>
                     <div className="flex items-center justify-between text-gray-500">
                         <p>{props.cuisine.join(", ")}</p>
-                        <p>₹ { props. averageCost } for one</p>
+                        <p>₹ {props.averageCost} for one</p>
                     </div>
                 </div>
             </div>
