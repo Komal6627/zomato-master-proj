@@ -1,7 +1,8 @@
-import React from "react";
+import React,  { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { IoMdArrowDropright } from "react-icons/io";
 import Slider from "react-slick";
+import { useSelector, useDispatch } from "react-redux";
 import ReactStars from "react-rating-stars-component";
 import ImageViewer from 'react-simple-image-viewer';
 
@@ -11,10 +12,14 @@ import MenuSimilarRestaurantCard from "../../Components/Restaurant/MenuSimilarRe
 import { NextArrow, PrevArrow } from "../../Components/CarousalArrow";
 import ReviewCard from "../../Components/Restaurant/Reviews/ReviewCard";
 import Mapview from "../../Components/Restaurant/Mapview";
+import { getImage } from "../../Redux/Reducer/Image/Image.action";
+import { getReviews } from "../../Redux/Reducer/Reviews/review.action";
 
 
 
 const Overview = () => {
+    const [menuImage, setMenuImages] = useState({ images: [] });
+    const [Reviews, setReviewss] = useState([]);
     const { id } = useParams();
 
     const settings = {
@@ -54,6 +59,23 @@ const Overview = () => {
         ],
     };
 
+    const reduxState = useSelector(
+        (globalStore) => globalStore.restaurant.selectedRestaurant.restaurant
+      );
+      const dispatch = useDispatch();
+    
+      useEffect(() => {
+        if (reduxState) {
+          dispatch(getImage(reduxState?.menuImage)).then((data) => {
+            const images = [];
+            data.payload.image.images.map(({ location }) => images.push(location));
+            setMenuImages(images);
+          });
+          dispatch(getReviews(reduxState?._id)).then((data) =>
+            setReviewss(data.payload.reviews)
+          );
+        }
+      }, []);
 
     const ratingChanged = (newRating) => {
         console.log(newRating);
@@ -121,6 +143,9 @@ const Overview = () => {
                             size={24}
                             activeColor="#ffd700"
                         />
+                        {Reviews.map((reviewData) => (
+                            <ReviewCard {...reviewData}/>
+                        ))}
                     </div>
 
                     <div className="my-4 w-full   md:hidden flex flex-col gap-4">

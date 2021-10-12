@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { AiOutlineCompass } from "react-icons/ai";
 import { BiTimeFive } from "react-icons/bi";
 
@@ -8,8 +9,32 @@ import FoodItem from "../../Components/Restaurant/Order-Online/FoodItem";
 import FoodList from "../../Components/Restaurant/Order-Online/FoodList";
 import MenuListContainer from "../../Components/Restaurant/Order-Online/MenuListContainer";
 
+// redux actions
+import { getFoodList } from "../../Redux/Reducer/Food/Food.action";
+// import { addCart } from "../../Redux/Reducer/Cart/Cart.action";
 
 const OrderOnline = () => {
+    const [menu, setMenu] = useState([]);
+    const [selected, setSelected] = useState("");
+
+    const onClickHandler = (e) => {
+        if (e.target.id) {
+            setSelected(e.target.id);
+        }
+        return;
+    };
+
+    const reduxState = useSelector(
+        (globalStore) => globalStore.restaurant.selectedRestaurant.restaurant
+    );
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        reduxState &&
+            dispatch(getFoodList(reduxState.menu)).then((data) =>
+                setMenu(data.payload.menus.menus)
+            );
+    }, [reduxState]);
     return (
         <>
             <div className="w-full h-screen flex px-3">
@@ -29,19 +54,10 @@ const OrderOnline = () => {
                         </h4>
                     </div>
 
-                    <section className="flex h-screen overflow-y-scroll  flex-col gap-3 md:gap-5">
-                        <FoodList
-                            title="Recommended"
-                            items={[
-                                {
-                                    price: "300",
-                                    rating: "3",
-                                    description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio sint quas autem obcaecati ipsum architecto minus illo! Molestiae nostrum repellat, sunt esse, ea dolorem sed unde aliquid assumenda id recusandae.",
-                                    image: "https://b.zmtcdn.com/data/dish_photos/bcc/8de555f5fee13dd644c121e82659abcc.jpg",
-                                },
-                            ]}
-                        />
-
+                    <section className="flex  h-screen overflow-y-scroll flex-col gap-3 md:gap-5">
+                        {menu.map((item) => (
+                            <FoodList key={item._id} {...item} />
+                        ))}
                     </section>
                 </div>
             </div>
