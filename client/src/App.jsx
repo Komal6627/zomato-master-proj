@@ -1,10 +1,10 @@
 import {Route, Redirect} from "react-router-dom";
+import axios from "axios";
 
 //HOC
 import HomeLayoutHOC from "./HOC/Home.HOC";
 import RestaurantLayoutHOC from "./HOC/Restaurant.HOC";
 import CheckoutLayoutHOC from "./HOC/Checkout.Hoc";
-
 
 //Component
 import Temp from "./Components/temp";
@@ -18,7 +18,19 @@ import Reviews from "./Page/Restaurant/Reviews";
 import Menu from "./Page/Restaurant/Menu";
 import Photos from "./Page/Restaurant/Photos";
 import Checkout from "./Page/Checkout";
-// Redirect
+import RedirectRestaurant from "./Page/Restaurant/Redirect";
+
+//axios global setting
+
+// axios.defaults.baseURL = 'https://api.example.com';
+//axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
+// axios global settings
+if (localStorage.zomatoUser) {
+  const { token } = JSON.parse(localStorage.zomatoUser);
+  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+}
 
 function App() {
   return (
@@ -27,7 +39,7 @@ function App() {
           <Redirect to="/delivery" />
       </Route>
 
-      <Route path="/restaurant/:id"  exact />
+      <Route path="/restaurant/:id"  exact component={RedirectRestaurant}/>
           
 
       <HomeLayoutHOC path="/:type" exact component = { Home }/>

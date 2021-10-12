@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { TiStarFullOutline } from "react-icons/ti";
 import { useDispatch } from "react-redux";

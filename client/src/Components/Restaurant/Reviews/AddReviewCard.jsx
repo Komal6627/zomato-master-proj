@@ -9,7 +9,13 @@ import ReviewModel from "./ReviewModel";
 const AddReviewCard = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const openModel = () => setIsOpen(true); 
+    const openModel = () =>{
+        if (!localStorage.zomatoUser) {
+            return alert("Please sign in to post a review");
+          }
+          setIsOpen(true); 
+    }
+  
     return (
         <>
         <ReviewModel isOpen={isOpen} setIsOpen={setIsOpen}/>

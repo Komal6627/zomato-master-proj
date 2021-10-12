@@ -1,100 +1,133 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { useDispatch } from "react-redux";
 
-export default function SignIn({ isOpen, setIsOpen }) {
+import { signUp } from "../../Redux/Reducer/Auth/Auth.action";
+export default function SignUp({ isOpen, setIsOpen }) {
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+    fullname: "",
+  });
 
-    function closeModal() {
-        setIsOpen(false)
-    }
+  const dispatch = useDispatch();
 
-    return (
-        <>
+  const handleChange = (e) =>
+    setUserData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
 
-            <Transition appear show={isOpen} as={Fragment}>
-                <Dialog
-                    as="div"
-                    className="fixed inset-0 z-10 overflow-y-auto"
-                    onClose={closeModal}
-                >
-                    <div className="min-h-screen px-4 text-center">
-                        <Transition.Child
-                            as={Fragment}
-                            enter="ease-out duration-300"
-                            enterFrom="opacity-0"
-                            enterTo="opacity-100"
-                            leave="ease-in duration-200"
-                            leaveFrom="opacity-100"
-                            leaveTo="opacity-0"
-                        >
-                            <Dialog.Overlay className="fixed inset-0" />
-                        </Transition.Child>
+  function closeModal() {
+    setIsOpen(false);
+  }
 
-                        {/* This element is to trick the browser into centering the modal contents. */}
-                        <span
-                            className="inline-block h-screen align-middle"
-                            aria-hidden="true"
-                        >
-                            &#8203;
-                        </span>
-                        <Transition.Child
-                            as={Fragment}
-                            enter="ease-out duration-300"
-                            enterFrom="opacity-0 scale-95"
-                            enterTo="opacity-100 scale-100"
-                            leave="ease-in duration-200"
-                            leaveFrom="opacity-100 scale-100"
-                            leaveTo="opacity-0 scale-95"
-                        >
-                            <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                                <Dialog.Title
-                                    as="h3"
-                                    className="text-lg font-medium leading-6 text-gray-900"
-                                >
-                                </Dialog.Title>
-                                <div className="mt-2 flex flex-col gap-3 w-full">
-                                    <button className="py-2 justify-center rounded-lg flex items-center gap-2 w-full border border-gray-400 bg-white  text-gray-700 hover:bg-gray-100">
-                                        Sign up with google <FcGoogle />
-                                    </button>
+  const submit = () => {
+    setUserData({
+      email: "",
+      password: "",
+      fullname: "",
+    });
+    dispatch(signUp(userData));
+  };
+  const googlesignin = () =>
+    (window.location.href = "http://localhost:4000/auth/google");
 
-                                    <form className="flex flex-col -gap-2">
+  return (
+    <>
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog
+          as="div"
+          className="fixed inset-0 z-10 overflow-y-auto"
+          onClose={closeModal}
+        >
+          <div className="min-h-screen px-4 text-center">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0" />
+            </Transition.Child>
 
-                                        <div className="w-full flex flex-col gap-2">
-                                            <label htmlFor="email">Fullname</label>
-                                            <input type="text" name="" id="fullname"placeholder="John Doe" rows="5" className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:outline-none focus:border-zomato-400" />
-                                        </div>
+            {/* This element is to trick the browser into centering the modal contents. */}
+            <span
+              className="inline-block h-screen align-middle"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                <Dialog.Title
+                  as="h3"
+                  className="text-lg font-medium leading-6 text-gray-900"
+                ></Dialog.Title>
+                <div className="mt-2 flex flex-col gap-3 w-full">
+                  <button
+                    onClick={googlesignin}
+                    className="py-2 justify-center rounded-lg flex items-center gap-2 w-full border border-gray-400 bg-white text-gray-700 hover:bg-gray-100"
+                  >
+                    Sign up With Google <FcGoogle />
+                  </button>
 
-                                    
-                                        <div className="w-full flex flex-col gap-2">
-                                            <label htmlFor="email">Email</label>
-                                            <input type="text" name="" id="email"placeholder="email@email.com" rows="5" className="w-fullborder border-gray-400 px-3 py-2 rounded-lgfocus:outline-none focus:border-zomato-400" />
-                                        </div>
-
-                                        <div className="w-full flex flex-col gap-2">
-                                            <label htmlFor="password">Password</label>
-                                            <input type="password" name="" id="password"placeholder="********" rows="5" className="w-full borderborder-gray-400 px-3 py-2 rounded-lg focus:outline-nonefocus:border-zomato-400" />
-                                        </div>
-
-                                        <div className="w-full text-center  bg-zomato-400 text-whitepy-2 rounded-lg">
-                                            Sign Up
-                                        </div>                                      
-                                    </form>
-                                </div>
-
-                                <div className="mt-4">
-                                    <button
-                                        type="button"
-                                        className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                                        onClick={closeModal}
-                                    >
-                                        Got it, thanks!
-                                    </button>
-                                </div>
-                            </div>
-                        </Transition.Child>
+                  <form className="flex flex-col gap-3">
+                    <div className=" w-full flex flex-col gap-2">
+                      <label htmlFor="fullname">Fullname</label>
+                      <input
+                        type="text"
+                        id="fullname"
+                        value={userData.fullname}
+                        onChange={handleChange}
+                        placeholder="John Doe"
+                        className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:outline-none focus:border-zomato-400"
+                      />
                     </div>
-                </Dialog>
-            </Transition>
-        </>
-    )
+                    <div className=" w-full flex flex-col gap-2">
+                      <label htmlFor="email">Email</label>
+                      <input
+                        type="email"
+                        id="email"
+                        value={userData.email}
+                        onChange={handleChange}
+                        placeholder="email@email.com"
+                        className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:outline-none focus:border-zomato-400"
+                      />
+                    </div>
+                    <div className=" w-full flex flex-col gap-2">
+                      <label htmlFor="password">Password</label>
+                      <input
+                        type="password"
+                        id="password"
+                        value={userData.password}
+                        onChange={handleChange}
+                        placeholder="*********"
+                        className="w-full border border-gray-400 px-3 py-2 rounded-lg focus:outline-none focus:border-zomato-400"
+                      />
+                    </div>
+                    <div
+                      onClick={submit}
+                      className="w-full  text-center bg-zomato-400 text-white py-2 rounded-lg"
+                    >
+                      Sign up
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition>
+    </>
+  );
 }
