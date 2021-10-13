@@ -1,5 +1,7 @@
 import {Route, Redirect} from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
 
 //HOC
 import HomeLayoutHOC from "./HOC/Home.HOC";
@@ -27,6 +29,10 @@ import GoogleAuth from "./Page/GoogleAuth";
 //axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
+// redux action
+import { getMyself } from "./Redux/Reducer/User/user.action";
+
+
 // axios global settings
 if (localStorage.zomatoUser) {
   const { token } = JSON.parse(localStorage.zomatoUser);
@@ -34,6 +40,10 @@ if (localStorage.zomatoUser) {
 }
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (localStorage.zomatoUser) dispatch(getMyself());
+  }, []);
   return (
     <>
       <Route path="/" exact >
