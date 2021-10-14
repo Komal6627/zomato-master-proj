@@ -67,7 +67,7 @@ const FoodItem = (props) => {
           </div>
           <BsTrashFill
             onClick={deleteFoodFromCart}
-            className="text-zomato-400 text-lg md:text-xl  "
+            className="text-zomato-400 text-lg md:text-xl"
           />
         </div>
       </div>
