@@ -51,7 +51,7 @@ const TabContainer = () => {
             route: "photos",
             isActive: currentPath.includes("photos"),
         },
-    ]
+    ];
     return (
         <>
             <div className="flex relative items-center pb-4 gap-8 md:gap-20 overflow-x-scroll border-b-2">

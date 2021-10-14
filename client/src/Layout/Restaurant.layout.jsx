@@ -28,6 +28,8 @@ const RestaurantLayout = (props) => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
+
+
   useEffect(() => {
     dispatch(getSpecificRestaurant(id)).then((data) => {
       setRestaurant((prev) => ({
@@ -35,7 +37,7 @@ const RestaurantLayout = (props) => {
         ...data.payload.restaurant,
       }));
 
-      dispatch(getImage(data.payload.restaurant.photos)).then((data) =>
+      dispatch(getImage(data.payload.restaurant?.photos)).then((data) =>
         setRestaurant((prev) => ({ ...prev, ...data.payload.image }))
       );
     });
